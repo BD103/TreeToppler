@@ -18,11 +18,13 @@ public abstract class BlocksMixin {
         cir.setReturnValue(ToppleBlock.createLogBlock(topMapColor, sideMapColor));
     }
 
-    // TODO(BD103): Don't make bamboo stems ToppleBlocks
-    // Make cherry and bamboo stems ToppleBlocks
+    // Make cherry logs ToppleBlocks
     @Inject(at = @At("HEAD"), method = "createBambooBlock", cancellable = true)
     private static void createBambooBlock(MapColor topMapColor, MapColor sideMapColor, BlockSoundGroup soundGroup, CallbackInfoReturnable<PillarBlock> cir) {
-        cir.setReturnValue(ToppleBlock.createBambooBlock(topMapColor, sideMapColor, soundGroup));
+        // Only modify cherry wood, not bamboo blocks
+        if (soundGroup == BlockSoundGroup.CHERRY_WOOD) {
+            cir.setReturnValue(ToppleBlock.createBambooBlock(topMapColor, sideMapColor, soundGroup));
+        }
     }
 
     // Make all nether log types ToppleBlocks
