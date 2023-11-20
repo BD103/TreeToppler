@@ -19,6 +19,9 @@ public abstract class BlocksMixin {
     }
 
     // Make cherry logs ToppleBlocks
+    //
+    // TODO(BD103): Rename to createLogBlock for next stable Minecraft release.
+    // https://github.com/FabricMC/yarn/pull/3715
     @Inject(at = @At("HEAD"), method = "createBambooBlock", cancellable = true)
     private static void createBambooBlock(MapColor topMapColor, MapColor sideMapColor, BlockSoundGroup soundGroup, CallbackInfoReturnable<PillarBlock> cir) {
         // Only modify cherry wood, not bamboo blocks
