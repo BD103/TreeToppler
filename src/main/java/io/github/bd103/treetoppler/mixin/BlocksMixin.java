@@ -13,20 +13,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Blocks.class)
 public abstract class BlocksMixin {
     // Make all log types ToppleBlocks
-    @Inject(at = @At("HEAD"), method = "createLogBlock", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "createLogBlock(Lnet/minecraft/block/MapColor;Lnet/minecraft/block/MapColor;)Lnet/minecraft/block/Block;", cancellable = true)
     private static void createLogBlock(MapColor topMapColor, MapColor sideMapColor, CallbackInfoReturnable<PillarBlock> cir) {
         cir.setReturnValue(ToppleBlock.createLogBlock(topMapColor, sideMapColor));
     }
 
     // Make cherry logs ToppleBlocks
-    //
-    // TODO(BD103): Rename to createLogBlock for next stable Minecraft release.
-    // https://github.com/FabricMC/yarn/pull/3715
-    @Inject(at = @At("HEAD"), method = "createBambooBlock", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "createLogBlock(Lnet/minecraft/block/MapColor;Lnet/minecraft/block/MapColor;Lnet/minecraft/sound/BlockSoundGroup;)Lnet/minecraft/block/Block;", cancellable = true)
     private static void createBambooBlock(MapColor topMapColor, MapColor sideMapColor, BlockSoundGroup soundGroup, CallbackInfoReturnable<PillarBlock> cir) {
         // Only modify cherry wood, not bamboo blocks
         if (soundGroup == BlockSoundGroup.CHERRY_WOOD) {
-            cir.setReturnValue(ToppleBlock.createBambooBlock(topMapColor, sideMapColor, soundGroup));
+            cir.setReturnValue(ToppleBlock.createLogBlock(topMapColor, sideMapColor, soundGroup));
         }
     }
 

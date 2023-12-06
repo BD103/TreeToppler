@@ -19,17 +19,10 @@ public class ToppleBlock extends PillarBlock {
     }
 
     public static ToppleBlock createLogBlock(MapColor topMapColor, MapColor sideMapColor) {
-        return new ToppleBlock(
-                AbstractBlock.Settings.create()
-                        .mapColor(state -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor)
-                        .instrument(Instrument.BASS)
-                        .strength(2.0F)
-                        .sounds(BlockSoundGroup.WOOD)
-                        .burnable()
-        );
+        return createLogBlock(topMapColor, sideMapColor, BlockSoundGroup.WOOD);
     }
 
-    public static ToppleBlock createBambooBlock(MapColor topMapColor, MapColor sideMapColor, BlockSoundGroup soundGroup) {
+    public static ToppleBlock createLogBlock(MapColor topMapColor, MapColor sideMapColor, BlockSoundGroup soundGroup) {
         return new ToppleBlock(
                 AbstractBlock.Settings.create()
                 .mapColor(state -> state.get(PillarBlock.AXIS) == Direction.Axis.Y ? topMapColor : sideMapColor)
